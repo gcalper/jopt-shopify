@@ -54,7 +54,7 @@
             "text_KxeJ6r": {
               "type": "text",
               "settings": {
-                "text": "<h3>白熱を、日常に。</h3>",
+                "text": "<h3>白熱を、日常に。test</h3>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
