@@ -1,0 +1,126 @@
+/* Force ALL product card images to be perfect squares */
+
+/* Main product card gallery container - force square */
+.product-card .card-gallery {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  --gallery-aspect-ratio: 1 !important;
+}
+
+/* Product media containers - force square */
+.product-card .product-media,
+.product-card .product-media-container {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: auto !important;
+  overflow: hidden !important;
+}
+
+/* Slideshow container and slides - force square */
+.product-card slideshow-component,
+.product-card slideshow-container,
+.product-card slideshow-slides,
+.product-card slideshow-slide {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* All images within product cards - force square and crop */
+.product-card img,
+.product-card .product-media-container img,
+.product-card .card-gallery img,
+.product-card .product-media__image,
+.product-card slideshow-slide img {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+/* SVG placeholders - force square */
+.product-card .card-gallery svg,
+.product-card .card-gallery__placeholder svg,
+.product-card placeholder-image {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Resource cards (search results, etc.) - force square for products */
+.resource-card[data-resource-type="product"] .resource-card__media {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+}
+
+.resource-card[data-resource-type="product"] .resource-card__media-wrapper,
+.resource-card[data-resource-type="product"] .resource-card__image-container {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+}
+
+.resource-card[data-resource-type="product"] .resource-card__image,
+.resource-card[data-resource-type="product"] .resource-card__image-placeholder {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  --resource-card-aspect-ratio: 1 !important;
+}
+
+/* Product card link wrapper - ensure square */
+product-card-link {
+  width: 100% !important;
+}
+
+product-card-link img {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Featured product blocks - force square */
+product-card .product-media-container,
+product-card .card-gallery {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+}
+
+product-card img {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Override any inline styles or variables that might affect aspect ratio */
+.product-card .card-gallery[style*="aspect-ratio"],
+.product-card .product-media[style*="aspect-ratio"] {
+  aspect-ratio: 1 / 1 !important;
+}
+
+/* Ensure grid items maintain square */
+.product-grid__item {
+  width: 100%;
+}
+
+.product-grid__item .product-card {
+  width: 100%;
+}
+
+/* Handle deferred media (videos with poster images) */
+.product-card deferred-media,
+.product-card .deferred-media__poster-button {
+  aspect-ratio: 1 / 1 !important;
+}
+
+.product-card deferred-media img {
+  aspect-ratio: 1 / 1 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
