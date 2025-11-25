@@ -250,6 +250,12 @@
     container-name: card-gallery-container; /* Optional: name the container */
   }
 
+  /* Gray out images for out of stock products */
+  .card-gallery:has(.product-badges--out-of-stock) img {
+    filter: grayscale(100%);
+    opacity: 0.6;
+  }
+
   .card-gallery__placeholder svg {
     height: 100%;
     width: 100%;
