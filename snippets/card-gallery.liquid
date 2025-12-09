@@ -186,7 +186,11 @@
           endif
 
           capture slideshow_children
-            render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true
+            if media.media_type == 'video' or media.media_type == 'external_video'
+              render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: false
+            else
+              render 'product-media', media: media, sizes: sizes, loading: loading, preview_image_only: true
+            endif
           endcapture
 
           render 'slideshow-slide', slide_id: media.id, index: forloop.index, hidden: hidden, class: class, attributes: attributes, children: slideshow_children, media_fit: media_fit
