@@ -11,7 +11,33 @@
 
 {%- liquid
   assign selected_product = closest.product
-  assign selected_variant_media = selected_product.selected_or_first_available_variant.featured_media
+  
+  # Get the selected variant's title (青, 緑, 黒, 紫)
+  assign selected_variant = selected_product.selected_or_first_available_variant
+  assign variant_title = selected_variant.title
+
+  # Find video that matches the variant title via alt text
+  assign selected_variant_media = null
+  for media in selected_product.media
+    if media.media_type == 'video' or media.media_type == 'external_video'
+      if media.alt == variant_title
+        assign selected_variant_media = media
+        break
+      endif
+    endif
+  endfor
+
+  # Fallback to first video if no match found
+  if selected_variant_media == null
+    for media in selected_product.media
+      if media.media_type == 'video' or media.media_type == 'external_video'
+        assign selected_variant_media = media
+        break
+      endif
+    endfor
+  endif
+
+
   assign first_3d_model = selected_product.media | where: 'media_type', 'model' | first
 
   if block_settings.hide_variants
