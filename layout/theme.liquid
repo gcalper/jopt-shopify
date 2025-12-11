@@ -65,5 +65,73 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+
+    <script>
+    (function() {
+      'use strict';
+      
+      function loadAndPlayVideos() {
+        const deferredMedias = document.querySelectorAll('deferred-media[autoplay]');
+        
+        deferredMedias.forEach(function(deferredMedia) {
+          const existingVideo = deferredMedia.querySelector('video');
+          const existingIframe = deferredMedia.querySelector('iframe');
+          
+          if (existingVideo) {
+            existingVideo.muted = true;
+            existingVideo.play().catch(function() {});
+          } else if (!existingIframe) {
+            const template = deferredMedia.querySelector('template');
+            if (template) {
+              const content = template.content.cloneNode(true);
+              deferredMedia.appendChild(content);
+              
+              setTimeout(function() {
+                const video = deferredMedia.querySelector('video');
+                if (video) {
+                  video.muted = true;
+                  video.play().catch(function() {});
+                }
+              }, 100);
+            }
+          }
+        });
+      }
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(loadAndPlayVideos, 500);
+        
+        document.addEventListener('change', function(e) {
+          if (e.target.matches('select[name*="option"]') || 
+              e.target.matches('select[name="id"]') ||
+              e.target.matches('input[type="radio"]')) {
+            setTimeout(loadAndPlayVideos, 300);
+          }
+        });
+        
+        document.addEventListener('click', function(e) {
+          if (e.target.matches('input[type="radio"]') || 
+              e.target.closest('label[for*="option"]')) {
+            setTimeout(loadAndPlayVideos, 300);
+          }
+        });
+        
+        const mediaGallery = document.querySelector('media-gallery');
+        if (mediaGallery) {
+          const observer = new MutationObserver(function() {
+            setTimeout(loadAndPlayVideos, 200);
+          });
+          observer.observe(mediaGallery, { 
+            childList: true, 
+            subtree: true 
+          });
+        }
+        
+        document.addEventListener('touchstart', function() {
+          setTimeout(loadAndPlayVideos, 100);
+        }, { once: true });
+      });
+    })();
+    </script>
   </body>
 </html>
